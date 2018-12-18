@@ -1,0 +1,15 @@
+* DAILY CLOSING PRICES NOV 1, 1993 TO APR 3, 2003;
+DATA PRICES;
+INFILE "C:\Users\ianku\Desktop\Time Seriese Practice\FINANCIAL MODELING AND ECONOMETRICS\Correlation Analysis\prices.txt";
+INPUT tbill msft sp500 ge ford day month year;
+return_msft=dif(msft)/lag(msft);
+return_sp500=dif(sp500)/lag(sp500); 
+return_ge=dif(ge)/lag(ge); 
+return_ford=dif(ford)/lag(ford);
+*DRAW SCATTER PLOTS OF GE AND S&P 500;
+PROC GPLOT;
+plot return_ge*return_sp500; *YOU CAN PLOT ANYTWO INDEX USING THIS FUNCTION;
+*CALCULATE THE CORRELATIONS AMONG THEM;
+PROC CORR;
+VAR RETURN_MSFT RETURN_GE RETURN_FORD RETURN_SP500;
+RUN;
